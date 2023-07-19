@@ -1,0 +1,39 @@
+pipeline:
+  name: "CAWeek4DemoPipeline "
+  identifier: CAWeek4DemoPipeline
+  projectIdentifier: CAWeek4TrainingDemo
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: CAWeek4GitHubConnector
+        repoName: week4
+        build: <+input>
+  stages:
+    - stage:
+        name: "CAWeek4DemoBuild "
+        identifier: CAWeek4DemoBuild
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: Week4DemoDelegate
+              namespace: harness-delegate-ng
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: CAweek4Docker
+                    repo: week4demo
+                    tags:
+                      - pythonwebapp
