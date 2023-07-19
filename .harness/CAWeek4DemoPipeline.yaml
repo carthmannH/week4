@@ -29,6 +29,7 @@ pipeline:
                     repo: week4demo
                     tags:
                       - <+pipeline.sequenceId>
+                    dockerfile: Dockerfile
           platform:
             os: Linux
             arch: Arm64
