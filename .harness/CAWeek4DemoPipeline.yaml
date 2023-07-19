@@ -36,4 +36,4 @@ pipeline:
                     connectorRef: CAweek4Docker
                     repo: week4demo
                     tags:
-                      - pythonwebapp
+                      - <+pipeline.sequenceId>
