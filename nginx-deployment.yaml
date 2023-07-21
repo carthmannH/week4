@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo
+  name: week4demo
 spec:
   selector:
     matchLabels:
-      app: Nodejs
+      app: week4demo
   replicas: 1
   template:
     metadata:
       labels:
-        app: nginx
+        app: week4demo
     spec:
       containers:
-      - name: vigilant_williams
+      - name: week4demo
         image: week4demo:32
         ports:
         - containerPort: 8080
