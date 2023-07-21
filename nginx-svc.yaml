@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo
+  name: week4demo
   labels:
-    app: Nodejs
+    app: week4demo
 spec:
   type: LoadBalancer
   ports:
   - port: 8080
   selector:
-    app: Nodejs
+    app: week4demo
