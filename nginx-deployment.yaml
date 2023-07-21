@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: week4demo
-        image: carthmannh/week4demo
+        image: carthmannh/week4demo:tag
         ports:
         - containerPort: 8080
