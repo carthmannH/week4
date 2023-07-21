@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vigilant_williams
+  name: demo
 spec:
   selector:
     matchLabels:
