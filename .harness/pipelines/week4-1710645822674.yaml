@@ -23,6 +23,7 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
+                          cd /github.com/carthmannH/week4
                           commit_sha=$(git rev-parse HEAD)
                           export COMMIT_SHA="$commit_sha"
                     environmentVariables: []
