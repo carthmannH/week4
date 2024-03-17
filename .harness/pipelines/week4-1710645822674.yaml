@@ -21,6 +21,7 @@ pipeline:
                     command: |-
                       sha=$(git rev-parse HEAD)
                       echo $sha
+                      export $sha
           platform:
             os: Linux
             arch: Amd64
