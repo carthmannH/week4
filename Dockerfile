@@ -1,4 +1,3 @@
-# Set the base image
 FROM python:latest
 
 # Set environment variable
