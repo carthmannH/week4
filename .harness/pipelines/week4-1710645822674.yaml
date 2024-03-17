@@ -20,9 +20,7 @@ pipeline:
                     shell: Sh
                     command: |
                       COMMIT_SHA=$(git rev-parse HEAD)
-                      # Extract the first five characters
                       sha="${COMMIT_SHA:0:5}"
-                      echo $sha
                     outputVariables:
                       - name: sha
           platform:
