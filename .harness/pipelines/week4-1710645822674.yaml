@@ -51,9 +51,9 @@ pipeline:
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: demo
-                    repo: week4demo
+                    repo: carthmannh/week4demo
                     tags:
-                      - <+<+pipeline.variables.sha_tag>.substring(0,3)>
+                      - <+pipeline.variables.sha_tag>
                     dockerfile: Dockerfile
   properties:
     ci:
