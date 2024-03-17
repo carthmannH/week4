@@ -1,10 +1,11 @@
+# Set the base image
 FROM python:alpine3.19
 
 # Set environment variable
 ENV NODE_ENV=production
 
 # Install additional dependencies
-RUN apt-get update && apt-get install -y python3
+RUN apk update && apk add --no-cache python3
 
 # Set the working directory
 WORKDIR /app
