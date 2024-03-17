@@ -53,7 +53,7 @@ pipeline:
                     connectorRef: account.harnessImage
                     repo: week4demo
                     tags:
-                      - sha_tag
+                      - <+pipeline.variables.sha_tag>
                     dockerfile: Dockerfile
   properties:
     ci:
