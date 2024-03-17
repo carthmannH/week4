@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:alpine3.19
 
 # Set environment variable
 ENV NODE_ENV=production
