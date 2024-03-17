@@ -29,9 +29,40 @@ pipeline:
             type: Cloud
             spec: {}
         description: ""
+    - stage:
+        name: "Build and push "
+        identifier: Build_and_push
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    repo: week4demo
+                    tags:
+                      - sha_tag
+                    dockerfile: Dockerfile
   properties:
     ci:
       codebase:
         connectorRef: account.Github_OAuth_1710645807319
         repoName: carthmannH/week4
         build: <+input>
+  variables:
+    - name: sha_tag
+      type: String
+      description: ""
+      required: false
+      value: sha
