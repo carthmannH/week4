@@ -4,6 +4,9 @@ FROM alpine:latest
 # Set environment variable
 ENV NODE_ENV=production
 
+# Install Flask
+RUN pip install flask
+
 # Install additional dependencies
 RUN apk update && apk add --no-cache python3
 
