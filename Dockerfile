@@ -5,7 +5,7 @@ FROM python:3.8-slim
 ENV NODE_ENV=production
 
 # Install Flask
-RUN pip install flask
+RUN python -m pip install flask
 
 # Set the working directory
 WORKDIR /app
