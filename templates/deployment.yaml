@@ -1,10 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-blue
-  namespace: demo-ns
-  annotations:
-    harness.io/direct-apply: "true"  # Marking as non-primary
+  name: myapp
+  namespace: demo-ns  # Specify the namespace for myapp deployment
 spec:
   replicas: 2
   selector:
@@ -17,7 +15,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: <+artifact.image>-blue
+        image: <+artifact.image>
         ports:
         - containerPort: 8080
 
@@ -27,7 +25,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: myapp-green
-  namespace: demo-prod
+  namespace: demo-prod  # Specify the namespace for myapp-green deployment
 spec:
   replicas: 3
   selector:
@@ -40,6 +38,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: <+artifact.image>-green
+        image: <+artifact.image>
         ports:
         - containerPort: 8080
