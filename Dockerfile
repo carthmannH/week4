@@ -1,14 +1,11 @@
 # Set the base image
-FROM alpine:latest
+FROM python:3.8-slim
 
 # Set environment variable
 ENV NODE_ENV=production
 
 # Install Flask
 RUN pip install flask
-
-# Install additional dependencies
-RUN apk update && apk add --no-cache python3
 
 # Set the working directory
 WORKDIR /app
