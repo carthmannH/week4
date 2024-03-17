@@ -18,10 +18,11 @@ pipeline:
                   identifier: Run_2
                   spec:
                     shell: Sh
-                    command: |-
+                    command: |
                       sha=$(git rev-parse HEAD)
                       echo $sha
-                      export $sha
+                    outputVariables:
+                      - name: sha
           platform:
             os: Linux
             arch: Amd64
