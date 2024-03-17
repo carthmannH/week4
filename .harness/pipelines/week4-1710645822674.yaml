@@ -53,7 +53,7 @@ pipeline:
                     connectorRef: demo
                     repo: week4demo
                     tags:
-                      - <+pipeline.variables.sha_tag>
+                      - <+<+pipeline.variables.sha_tag>.substring(0,3)>
                     dockerfile: Dockerfile
   properties:
     ci:
