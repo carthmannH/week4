@@ -23,8 +23,8 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
-                          sha=$(git rev-parse HEAD)
-                          export sha
+                          commit_sha=$(git rev-parse HEAD)
+                          export COMMIT_SHA="$commit_sha"
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
