@@ -1,4 +1,4 @@
-FROM node:21-bullseye
+FROM alpine:latest
 ENV NODE_ENV=production
 
 WORKDIR /app
