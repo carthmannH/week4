@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: <blue_image_name>
+        image: <+artifact.image>-blue
         ports:
         - containerPort: 8080
 
@@ -40,6 +40,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: <green_image_name>
+        image: <+artifact.image>-green
         ports:
         - containerPort: 8080
