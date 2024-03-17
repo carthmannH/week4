@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: {{.Values.name}}
+        color: blue
     spec:
       containers:
       - name: {{.Values.name}}
@@ -25,7 +26,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{.Values.name}}-green
-  namespace: demo-prod
+  namespace: demo-ns
 spec:
   replicas: 3
   selector:
@@ -35,9 +36,11 @@ spec:
     metadata:
       labels:
         app: {{.Values.name}}
+        color: green
     spec:
       containers:
       - name: {{.Values.name}}
         image: {{.Values.image}}:green
         ports:
         - containerPort: 8080
+
