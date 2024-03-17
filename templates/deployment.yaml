@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: {{.Values.name}}-blue
   namespace: demo-ns
+  annotations:
+    harness.io/direct-apply: "true" # Marking as non-primary
 spec:
   replicas: 2
   selector:
@@ -43,4 +45,5 @@ spec:
         image: {{.Values.image}}:green
         ports:
         - containerPort: 8080
+
 
