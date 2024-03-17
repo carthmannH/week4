@@ -5,6 +5,31 @@ pipeline:
   orgIdentifier: default
   stages:
     - stage:
+        name: "Extract Sha "
+        identifier: Extract_Sha
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          sha=$(git rev-parse HEAD)
+                          export sha
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+        tags: {}
+    - stage:
         name: Build
         identifier: Build
         type: CI
@@ -18,9 +43,7 @@ pipeline:
                   identifier: Run_2
                   spec:
                     shell: Sh
-                    command: |-
-                      commit_sha=$(git rev-parse HEAD)
-                      echo "Latest commit SHA: $commit_sha"
+                    command: echo $sha
           platform:
             os: Linux
             arch: Amd64
