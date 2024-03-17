@@ -14,11 +14,13 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: Echo Welcome Message
-                  identifier: Echo_Welcome_Message
+                  name: Run_2
+                  identifier: Run_2
                   spec:
                     shell: Sh
-                    command: echo "Welcome to Harness CI"
+                    command: |-
+                      commit_sha=$(git rev-parse HEAD)
+                      echo "Latest commit SHA: $commit_sha"
           platform:
             os: Linux
             arch: Amd64
