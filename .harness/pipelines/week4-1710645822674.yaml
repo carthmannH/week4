@@ -5,32 +5,6 @@ pipeline:
   orgIdentifier: default
   stages:
     - stage:
-        name: "Extract Sha "
-        identifier: Extract_Sha
-        description: ""
-        type: Custom
-        spec:
-          execution:
-            steps:
-              - step:
-                  type: ShellScript
-                  name: ShellScript_1
-                  identifier: ShellScript_1
-                  spec:
-                    shell: Bash
-                    executionTarget: {}
-                    source:
-                      type: Inline
-                      spec:
-                        script: |-
-                          cd /github.com/carthmannH/week4
-                          commit_sha=$(git rev-parse HEAD)
-                          export COMMIT_SHA="$commit_sha"
-                    environmentVariables: []
-                    outputVariables: []
-                  timeout: 10m
-        tags: {}
-    - stage:
         name: Build
         identifier: Build
         type: CI
@@ -44,13 +18,16 @@ pipeline:
                   identifier: Run_2
                   spec:
                     shell: Sh
-                    command: echo $sha
+                    command: |-
+                      sha=$(git rev-parse HEAD)
+                      echo $sha
           platform:
             os: Linux
             arch: Amd64
           runtime:
             type: Cloud
             spec: {}
+        description: ""
   properties:
     ci:
       codebase:
