@@ -50,7 +50,7 @@ pipeline:
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
-                    connectorRef: account.harnessImage
+                    connectorRef: demo
                     repo: week4demo
                     tags:
                       - <+pipeline.variables.sha_tag>
