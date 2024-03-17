@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: your-image:blue
+        image: {{.Values.image}}:blue
         ports:
         - containerPort: 8080
 
@@ -38,6 +38,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: your-image:green
+        image: {{.Values.image}}:green
         ports:
         - containerPort: 8080
