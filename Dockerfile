@@ -3,4 +3,5 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-CMD [ "app.py" ]
+CMD ["python", "app.py"]
+
