@@ -18,9 +18,9 @@ pipeline:
                   identifier: Run_2
                   spec:
                     shell: Sh
-                    command: |
-                      COMMIT_SHA=$(git rev-parse HEAD)
-                      sha="${COMMIT_SHA:0:5}"
+                    command: |+
+                      sha=$(git rev-parse HEAD)
+
                     outputVariables:
                       - name: sha
           platform:
