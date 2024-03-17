@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.name}}-blue
+  name: myapp
   namespace: demo-ns
   annotations:
     harness.io/direct-apply: "true" # Marking as non-primary
@@ -9,16 +9,15 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: {{.Values.name}}
+      app: myapp
   template:
     metadata:
       labels:
-        app: {{.Values.name}}
-        color: blue
+        app: myapp
     spec:
       containers:
-      - name: {{.Values.name}}
-        image: {{.Values.image}}:blue
+      - name: myapp
+        image: <+artifact.image>
         ports:
         - containerPort: 8080
 
@@ -27,24 +26,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.name}}-green
+  name: myapp-green
   namespace: demo-ns
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: {{.Values.name}}
+      app: myapp
   template:
     metadata:
       labels:
-        app: {{.Values.name}}
-        color: green
+        app: myapp
     spec:
       containers:
-      - name: {{.Values.name}}
-        image: {{.Values.image}}:green
+      - name: myapp
+        image: <+artifact.image>
         ports:
         - containerPort: 8080
+
 
 
 
