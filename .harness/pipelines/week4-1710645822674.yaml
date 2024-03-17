@@ -18,9 +18,9 @@ pipeline:
                   identifier: Run_2
                   spec:
                     shell: Sh
-                    command: |
-                      sha=$(git rev-parse HEAD)
-                      export sha
+                    command: |+
+                      export sha=$(git rev-parse HEAD)
+
                     outputVariables:
                       - name: sha
           platform:
@@ -53,7 +53,7 @@ pipeline:
                     connectorRef: demo
                     repo: carthmannh/week4demo
                     tags:
-                      - <+pipeline.variables.sha_tag>
+                      - <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
                     dockerfile: Dockerfile
   properties:
     ci:
@@ -61,9 +61,3 @@ pipeline:
         connectorRef: account.Github_OAuth_1710645807319
         repoName: carthmannH/week4
         build: <+input>
-  variables:
-    - name: sha_tag
-      type: String
-      description: ""
-      required: false
-      value: sha
