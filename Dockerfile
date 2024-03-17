@@ -1,5 +1,5 @@
 # Set the base image
-FROM python:alpine3.19
+FROM alpine:latest
 
 # Set environment variable
 ENV NODE_ENV=production
