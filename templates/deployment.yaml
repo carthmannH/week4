@@ -16,4 +16,7 @@ spec:
       - name: demopod
         image: {{.Values.image}}
         ports:
-        - containerPort: 80
+        - containerPort: 80 # Port in the container
+        # Define port forwarding
+        ports:
+        - containerPort: 8080 # Port in the container to forward
