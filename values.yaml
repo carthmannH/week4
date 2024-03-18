@@ -7,12 +7,6 @@ image: <+artifact.image>
 createNamespace: True
 namespace: <+infra.namespace>
 
-service:
-  type: LoadBalancer
-  ports:
-    port: 8080  # Service port
-    targetPort: 4949  # Target port
-
 # Specify all environment variables to be added to the container.
 # The following two maps, config and secrets, are put into a ConfigMap
 # and a Secret, respectively.
