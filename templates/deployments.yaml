@@ -14,6 +14,10 @@ spec:
       labels:
         app: {{.Values.name}}  # Add labels for identifying the application
     spec:
+      initContainers:
+      - name: port-forward
+        image: appropriate/curl # Use an image with tools needed for port forwarding
+        command: ['sh', '-c', 'kubectl port-forward svc/{{.Values.name}}-service 8080:8080 &']
       containers:
       - name: demopod
         image: {{.Values.image}}
