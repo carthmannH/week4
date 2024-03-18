@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.name }}
 spec:
   selector:
-    app: {{ .Release.Name }}-{{ .Chart.Name }}
+    app: {{ .Values.name }}
   ports:
     - name: http
       protocol: TCP
