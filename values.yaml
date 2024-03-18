@@ -16,11 +16,6 @@ ports:
       port: 8080
       targetPort: 4949
 
-# A Service can map an incoming port to any targetPort.
-# targetPort is where application is listening on inside the container.
-servicePort: 8080
-serviceTargetPort: 4949
-
 # Specify all environment variables to be added to the container.
 # The following two maps, config and secrets, are put into a ConfigMap
 # and a Secret, respectively.
