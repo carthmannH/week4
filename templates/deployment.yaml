@@ -11,5 +11,10 @@ spec:
     metadata:
       labels:
         app: {{.Values.name}}  # Add labels for identifying the application
-    
+    spec:
+      containers:
+      - name: {{.Values.name}}
+        image: {{.Values.image}}
+        ports:
+        - containerPort: 4949  # Port your application listens on inside the container
        
