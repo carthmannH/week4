@@ -10,4 +10,7 @@ spec:
   - port: {{.Values.servicePort}}
     targetPort: {{.Values.serviceTargetPort}}
     protocol: TCP
+    
+    selector:
+    app: demopod  # Replace with your app label selector
   
