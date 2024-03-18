@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{.Values.name}}
-  annotations:
-    harness.io/direct-apply: "true"  # Marking as non-primary
 spec:
   selector:
     matchLabels:
