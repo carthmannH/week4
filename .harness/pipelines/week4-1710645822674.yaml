@@ -5,6 +5,37 @@ pipeline:
   orgIdentifier: default
   stages:
     - stage:
+        name: BanditScan
+        identifier: BanditScan
+        description: ""
+        type: SecurityTests
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: K8Connector
+              namespace: demo-prod
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Bandit
+                  name: Bandit_1
+                  identifier: Bandit_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      name: <+input>
+                      variant: <+input>
+                    advanced:
+                      log:
+                        level: info
+    - stage:
         name: Build
         identifier: Build
         type: CI
