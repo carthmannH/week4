@@ -22,6 +22,6 @@ spec:
       - name: demopod
         image: {{.Values.image}}
         ports:
-        - containerPort: 80 # Port in the container to listen on
+        - containerPort: 4949 # Port in the container to listen on
           name: http
         - containerPort: 8080 # Port in the container to forward
