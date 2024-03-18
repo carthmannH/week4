@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.name}}
+  annotations:
+    harness.io/direct-apply: "true"  # Marking as non-primary
+spec:
+  selector:
+    matchLabels:
+      app: {{.Values.name}}
+  replicas: {{.Values.replicas}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.name}}  # Add labels for identifying the application
+    spec:
+      containers:
+      - name: demopod
+        image: {{.Values.image}}
+        ports:
+        - containerPort: 80
