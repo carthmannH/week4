@@ -9,4 +9,4 @@ spec:
     targetPort: {{ .Values.serviceTargetPort }}
     protocol: TCP
   selector:
-    app: demopod
+    app: myapp
