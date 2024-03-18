@@ -5,6 +5,10 @@ metadata:
   annotations:
     harness.io/primary-service: "true"  # Marking as primary service
 spec:
+  type: LoadBalancer  # Specify the type of the service
+  ports:
+    - port: 80  # Specify the port for the service
+      targetPort: 8080  # Specify the target port of your application
   selector:
     app: myapp
     harness.io/color: blue
@@ -18,5 +22,9 @@ metadata:
   annotations:
     harness.io/stage-service: "true"  # Marking as stage service
 spec:
+  type: LoadBalancer  # Specify the type of the service
+  ports:
+    - port: 80  # Specify the port for the service
+      targetPort: 8080  # Specify the target port of your application
   selector:
     app: myapp
