@@ -7,11 +7,9 @@ image: <+artifact.image>
 createNamespace: True
 namespace: <+infra.namespace>
 
-# Service Type allow you to specify what kind of service you want.
-# Possible values for ServiceType are:
-# ClusterIP | NodePort | LoadBalancer | ExternalName
-serviceType: LoadBalancer
-ports:
+service:
+  type: LoadBalancer
+  ports:
     - name: http
       protocol: TCP
       port: 8080  # Service port
