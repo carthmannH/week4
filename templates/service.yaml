@@ -11,4 +11,4 @@ spec:
     targetPort: {{.Values.serviceTargetPort}}
     protocol: TCP
   selector:
-    app: {{.Values.name}}
+    app: myapp  # Replace 'myapp' with the correct label selector for your Pods
