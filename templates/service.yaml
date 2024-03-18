@@ -10,5 +10,5 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 4949  # Service port
+      port: 8080  # Service port
       targetPort: 4949  # Target port
