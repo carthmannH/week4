@@ -12,5 +12,5 @@ spec:
     protocol: TCP
     
     selector:
-    app: demopod  # Replace with your app label selector
+    app: myapp  # Replace with your app label selector
   
