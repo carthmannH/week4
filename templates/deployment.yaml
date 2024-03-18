@@ -15,6 +15,5 @@ spec:
       containers:
       - name: {{ .Values.name }}
         image: {{.Values.image}}
-        ports:
-        - containerPort: 4949 # Port in the container
+       
        
