@@ -6,8 +6,9 @@ metadata:
 spec:
   selector:
     app: myapp
- service:
   type: LoadBalancer
   ports:
-    port: 8080  # Service port
-    targetPort: 4949  # Target port
+    - name: http
+      protocol: TCP
+      port: 8080  # Service port
+      targetPort: 4949  # Target port
