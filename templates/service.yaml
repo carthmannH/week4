@@ -4,6 +4,7 @@ metadata:
   name: {{.Values.name}}-svc
 spec:
   type: {{.Values.serviceType}}
+  loadBalancerIP: 127.0.0.1
   ports:
   - port: {{.Values.servicePort}}
     targetPort: {{.Values.serviceTargetPort}}
