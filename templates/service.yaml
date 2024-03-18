@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.name }}
+  name: myapp
+  namespace: demo-ns
 spec:
   selector:
-    app: {{ .Values.name }}
+    app: myapp
   ports:
     - name: http
       protocol: TCP
-      port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
-  type: {{ .Values.service.type }}
+      port: 8080  # Service port
+      targetPort: 4949  # Target port
+  type: LoadBalancer
