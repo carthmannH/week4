@@ -75,6 +75,8 @@ pipeline:
                     isAutoRejectEnabled: false
                     approverInputs: []
         tags: {}
+        when:
+          pipelineStatus: All
     - stage:
         name: Build
         identifier: Build
