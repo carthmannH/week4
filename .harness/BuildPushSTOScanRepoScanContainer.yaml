@@ -103,6 +103,8 @@ pipeline:
             type: Cloud
             spec: {}
         description: ""
+        when:
+          pipelineStatus: All
     - stage:
         name: "Build and push "
         identifier: Build_and_push
@@ -128,6 +130,8 @@ pipeline:
                     tags:
                       - <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
                     dockerfile: Dockerfile
+        when:
+          pipelineStatus: All
   properties:
     ci:
       codebase:
