@@ -154,4 +154,4 @@ pipeline:
         build: <+input>
   identifier: BuildPushSTOScanRepoScanContainer
   tags: {}
-  name: BuildPushSTOScanRepoScanContainer
+  name: BuildPushPytestSTOScanRepo
