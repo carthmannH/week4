@@ -1,0 +1,113 @@
+---
+pipeline:
+  projectIdentifier: "default_project"
+  orgIdentifier: "default"
+  stages:
+  - stage:
+      name: "BanditRepoScan"
+      identifier: "BanditRepoScan"
+      description: ""
+      type: "Pipeline"
+      spec:
+        org: "default"
+        pipeline: "BanditScan"
+        project: "default_project"
+        inputs:
+          identifier: "BanditScan"
+          properties:
+            ci:
+              codebase:
+                build: "<+input>"
+          stages:
+          - stage:
+              identifier: "BanditRepoScan"
+              type: "SecurityTests"
+              spec:
+                execution:
+                  steps:
+                  - step:
+                      identifier: "Bandit_1"
+                      type: "Bandit"
+                      spec:
+                        target:
+                          type: "repository"
+                          name: "<+input>"
+                          variant: "<+input>"
+  - stage:
+      name: "Build"
+      identifier: "Build"
+      type: "CI"
+      spec:
+        cloneCodebase: true
+        execution:
+          steps:
+          - step:
+              type: "Run"
+              name: "Run_2"
+              identifier: "Run_2"
+              spec:
+                shell: "Sh"
+                command: "export sha=$(git rev-parse HEAD)\n\n"
+                outputVariables:
+                - name: "sha"
+        platform:
+          os: "Linux"
+          arch: "Amd64"
+        runtime:
+          type: "Cloud"
+          spec: {}
+      description: ""
+  - stage:
+      name: "Build and push "
+      identifier: "Build_and_push"
+      description: ""
+      type: "CI"
+      spec:
+        cloneCodebase: true
+        platform:
+          os: "Linux"
+          arch: "Amd64"
+        runtime:
+          type: "Cloud"
+          spec: {}
+        execution:
+          steps:
+          - step:
+              type: "BuildAndPushDockerRegistry"
+              name: "BuildAndPushDockerRegistry_1"
+              identifier: "BuildAndPushDockerRegistry_1"
+              spec:
+                connectorRef: "demo"
+                repo: "carthmannh/week4demo"
+                tags:
+                - "<+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>"
+                dockerfile: "Dockerfile"
+          - step:
+              type: "AquaTrivy"
+              name: "AquaTrivy_1"
+              identifier: "AquaTrivy_1"
+              spec:
+                mode: "orchestration"
+                config: "default"
+                target:
+                  type: "container"
+                  name: "<+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>"
+                  variant: "<+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>-variant"
+                advanced:
+                  log:
+                    level: "info"
+                  fail_on_severity: "none"
+                privileged: true
+                image:
+                  type: "docker_v2"
+                  name: "carthmannh/week4demo"
+                  tag: "<+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>"
+  properties:
+    ci:
+      codebase:
+        connectorRef: "account.Github_OAuth_1710645807319"
+        repoName: "carthmannH/week4"
+        build: "<+input>"
+  identifier: "BuildPushSTOScanRepoScanContainer"
+  tags: {}
+  name: "BuildPushSTOScanRepoScanContainer"
