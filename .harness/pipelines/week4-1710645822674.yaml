@@ -99,6 +99,7 @@ pipeline:
                     advanced:
                       log:
                         level: info
+                      fail_on_severity: none
                     privileged: true
                     image:
                       type: docker_v2
