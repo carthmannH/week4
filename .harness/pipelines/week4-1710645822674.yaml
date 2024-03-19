@@ -5,6 +5,36 @@ pipeline:
   orgIdentifier: default
   stages:
     - stage:
+        name: BanditRepoScan
+        identifier: BanditRepoScan
+        description: ""
+        type: Pipeline
+        spec:
+          org: default
+          pipeline: BanditScan
+          project: default_project
+          inputs:
+            identifier: BanditScan
+            properties:
+              ci:
+                codebase:
+                  build: <+input>
+            stages:
+              - stage:
+                  identifier: BanditRepoScan
+                  type: SecurityTests
+                  spec:
+                    execution:
+                      steps:
+                        - step:
+                            identifier: Bandit_1
+                            type: Bandit
+                            spec:
+                              target:
+                                type: repository
+                                name: <+input>
+                                variant: <+input>
+    - stage:
         name: Build
         identifier: Build
         type: CI
