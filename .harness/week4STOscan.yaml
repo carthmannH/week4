@@ -1,0 +1,43 @@
+inputSet:
+  pipeline:
+    identifier: Build_carthmannH_week4_1710645829913
+    stages:
+      - stage:
+          identifier: BanditRepoScan
+          type: Pipeline
+          spec:
+            inputs:
+              identifier: BanditScan
+              properties:
+                ci:
+                  codebase:
+                    build:
+                      spec:
+                        branch: main
+                      type: branch
+              stages:
+                - stage:
+                    identifier: BanditRepoScan
+                    type: SecurityTests
+                    spec:
+                      execution:
+                        steps:
+                          - step:
+                              identifier: Bandit_1
+                              type: Bandit
+                              spec:
+                                target:
+                                  type: repository
+                                  name: week4stoscan
+                                  variant: week4variantstoscan
+    properties:
+      ci:
+        codebase:
+          build:
+            spec:
+              branch: main
+            type: branch
+  name: week4STOscan
+  identifier: week4STOscan
+  orgIdentifier: default
+  projectIdentifier: default_project
