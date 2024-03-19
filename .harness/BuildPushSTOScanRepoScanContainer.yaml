@@ -120,6 +120,32 @@ pipeline:
                       type: docker_v2
                       name: carthmannh/week4demo
                       tag: <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
+    - stage:
+        name: BuildApproval
+        identifier: BuildApproval
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: Approval
+                  identifier: Approval
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - Approval
+                    isAutoRejectEnabled: false
+                    approverInputs: []
+        tags: {}
   properties:
     ci:
       codebase:
