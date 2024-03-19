@@ -1,0 +1,56 @@
+inputSet:
+  pipeline:
+    identifier: BuildPushSTOScanRepoScanContainer
+    stages:
+      - stage:
+          identifier: PyTest
+          type: Pipeline
+          spec:
+            inputs:
+              identifier: PyTest
+              properties:
+                ci:
+                  codebase:
+                    build:
+                      spec:
+                        branch: main
+                      type: branch
+      - stage:
+          identifier: BanditRepoScan
+          type: Pipeline
+          spec:
+            inputs:
+              identifier: BanditScan
+              properties:
+                ci:
+                  codebase:
+                    build:
+                      spec:
+                        branch: main
+                      type: branch
+              stages:
+                - stage:
+                    identifier: BanditRepoScan
+                    type: SecurityTests
+                    spec:
+                      execution:
+                        steps:
+                          - step:
+                              identifier: Bandit_1
+                              type: Bandit
+                              spec:
+                                target:
+                                  type: repository
+                                  name: mainSTOscan
+                                  variant: variantSTOscan
+    properties:
+      ci:
+        codebase:
+          build:
+            spec:
+              branch: main
+            type: branch
+  name: fullpipeline
+  identifier: fullpipeline
+  orgIdentifier: default
+  projectIdentifier: default_project
