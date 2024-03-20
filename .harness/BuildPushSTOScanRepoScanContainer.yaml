@@ -11,13 +11,8 @@ pipeline:
           org: default
           pipeline: PyTest
           project: default_project
-          inputs:
-            identifier: PyTest
-            properties:
-              ci:
-                codebase:
-                  build: <+input>
-          outputs: []
+          inputSetReferences:
+            - GitRepoInputSet
     - stage:
         name: BanditRepoScan
         identifier: BanditRepoScan
