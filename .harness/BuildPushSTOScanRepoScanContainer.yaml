@@ -17,6 +17,7 @@ pipeline:
               ci:
                 codebase:
                   build: <+input>
+          outputs: []
     - stage:
         name: BanditRepoScan
         identifier: BanditRepoScan
@@ -222,7 +223,7 @@ pipeline:
                             identifier: PreProdInfra
                             type: KubernetesDirect
                             spec:
-                              namespace: <+input>
+                              namespace: demo-ns
         when:
           pipelineStatus: All
   properties:
