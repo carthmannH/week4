@@ -1,0 +1,56 @@
+inputSet:
+  name: CITriggerInputSet
+  identifier: CITriggerInputSet
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: BuildPushSTOScanRepoScanContainer
+    stages:
+      - stage:
+          identifier: PyTest
+          type: Pipeline
+          spec:
+            inputs:
+              identifier: PyTest
+              properties:
+                ci:
+                  codebase:
+                    build:
+                      type: branch
+                      spec:
+                        branch: <+trigger.branch>
+      - stage:
+          identifier: BanditRepoScan
+          type: Pipeline
+          spec:
+            inputs:
+              identifier: BanditScan
+              properties:
+                ci:
+                  codebase:
+                    build:
+                      type: branch
+                      spec:
+                        branch: <+trigger.branch>
+              stages:
+                - stage:
+                    identifier: BanditRepoScan
+                    type: SecurityTests
+                    spec:
+                      execution:
+                        steps:
+                          - step:
+                              identifier: Bandit_1
+                              type: Bandit
+                              spec:
+                                target:
+                                  type: repository
+                                  name: mainRepoScan
+                                  variant: "mainRepoScanVariant "
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
