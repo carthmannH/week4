@@ -141,11 +141,28 @@ pipeline:
           org: default
           pipeline: K8Deployment
           project: default_project
-          inputSetReferences:
-            - demonstest
-        when:
-          pipelineStatus: All
-          condition: <+lastPublished.tag> == <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
+          inputs:
+            identifier: K8Deployment
+            stages:
+              - stage:
+                  identifier: K8Deploy
+                  type: Deployment
+                  spec:
+                    service:
+                      serviceInputs:
+                        serviceDefinition:
+                          type: Kubernetes
+                          spec:
+                            artifacts:
+                              primary:
+                                primaryArtifactRef: PythonApp
+                                sources:
+                                  - identifier: PythonApp
+                                    type: DockerRegistry
+                                    spec:
+                                      tag: <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
+                    environment:
+                      infrastructureDefinitions: <+input>
   properties:
     ci:
       codebase:
