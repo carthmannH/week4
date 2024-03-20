@@ -223,6 +223,8 @@ pipeline:
                             type: KubernetesDirect
                             spec:
                               namespace: <+input>
+        when:
+          pipelineStatus: All
   properties:
     ci:
       codebase:
