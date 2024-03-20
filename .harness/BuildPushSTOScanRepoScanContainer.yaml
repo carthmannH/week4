@@ -71,7 +71,8 @@ pipeline:
                           - result.xml
         failureStrategies:
           - onFailure:
-              errors: []
+              errors:
+                - AllErrors
               action:
                 type: MarkAsSuccess
     - stage:
@@ -93,7 +94,8 @@ pipeline:
           pipelineStatus: All
         failureStrategies:
           - onFailure:
-              errors: []
+              errors:
+                - AllErrors
               action:
                 type: MarkAsSuccess
     - stage:
