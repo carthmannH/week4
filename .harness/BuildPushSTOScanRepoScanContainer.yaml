@@ -216,7 +216,13 @@ pipeline:
                                     spec:
                                       tag: <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
                     environment:
-                      infrastructureDefinitions: <+input>
+                      infrastructureDefinitions:
+                        - identifier: PreProdInfra
+                          inputs:
+                            identifier: PreProdInfra
+                            type: KubernetesDirect
+                            spec:
+                              namespace: <+input>
   properties:
     ci:
       codebase:
