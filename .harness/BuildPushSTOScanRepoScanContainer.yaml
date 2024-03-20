@@ -132,6 +132,21 @@ pipeline:
                     dockerfile: Dockerfile
         when:
           pipelineStatus: All
+    - stage:
+        name: CDStage
+        identifier: CDStage
+        description: ""
+        type: Pipeline
+        spec:
+          org: default
+          pipeline: K8Deployment
+          project: default_project
+          inputSetReferences:
+            - demonstest
+        when:
+          pipelineStatus: All
+          condition: |
+            sha == 'week4demo:<tag>'
   properties:
     ci:
       codebase:
