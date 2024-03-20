@@ -76,28 +76,52 @@ pipeline:
               action:
                 type: MarkAsSuccess
     - stage:
-        name: BanditRepoScan
-        identifier: BanditRepoScan
+        name: gitRepoScan
+        identifier: gitRepoScan
         description: ""
-        type: Pipeline
+        type: SecurityTests
         spec:
-          org: default
-          pipeline: BanditScan
-          project: default_project
-          inputs:
-            identifier: BanditScan
-            properties:
-              ci:
-                codebase:
-                  build: <+input>
-        when:
-          pipelineStatus: All
-        failureStrategies:
-          - onFailure:
-              errors:
-                - AllErrors
-              action:
-                type: MarkAsSuccess
+          cloneCodebase: true
+          sharedPaths:
+            - /var/run
+          caching:
+            enabled: false
+            paths: []
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: K8Connector
+              namespace: demo-ns
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Background
+                  name: DinD
+                  identifier: DinD
+                  spec:
+                    connectorRef: demo
+                    image: docker:dind
+                    shell: Sh
+                    privileged: true
+                    entrypoint:
+                      - dockerd
+              - step:
+                  type: Bandit
+                  name: Bandit_1
+                  identifier: Bandit_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      name: gitReposcan
+                      variant: gitReposcanVariant
+                    advanced:
+                      log:
+                        level: info
+                    privileged: true
     - stage:
         name: unitTestrgitRepoScanApproval
         identifier: BuildApproval
