@@ -167,6 +167,7 @@ pipeline:
                     image:
                       type: local_image
                       name: week4demo
+                      domain: https://index.docker.io/v2/
                       tag: <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
     - stage:
         name: CDStage
