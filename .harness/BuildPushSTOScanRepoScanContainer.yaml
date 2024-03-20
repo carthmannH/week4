@@ -133,43 +133,6 @@ pipeline:
         when:
           pipelineStatus: All
     - stage:
-        name: DinD
-        identifier: DinD
-        description: ""
-        type: CI
-        spec:
-          cloneCodebase: false
-          infrastructure:
-            type: KubernetesDirect
-            spec:
-              connectorRef: K8Connector
-              namespace: demo-prod
-              nodeSelector: {}
-              os: Linux
-          sharedPaths:
-            - /var/run
-            - /var/lib/docker
-          caching:
-            enabled: false
-            paths: []
-          execution:
-            steps:
-              - step:
-                  type: Background
-                  name: dind_Service
-                  identifier: dind_Service
-                  spec:
-                    connectorRef: demo
-                    image: docker:dind
-                    shell: Sh
-                    privileged: true
-        variables:
-          - name: DockerHubPAT
-            type: Secret
-            description: ""
-            required: false
-            value: demo_docker
-    - stage:
         name: ContainerScan
         identifier: ContainerScan
         description: ""
@@ -187,6 +150,16 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Background
+                  name: dind
+                  identifier: dind
+                  spec:
+                    connectorRef: demo
+                    image: docker:dind
+                    shell: Sh
+                    entrypoint:
+                      - dockerd
+              - step:
                   type: AquaTrivy
                   name: AquaTrivy_1
                   identifier: AquaTrivy_1
@@ -202,10 +175,15 @@ pipeline:
                         level: info
                     privileged: true
                     image:
-                      type: local_image
+                      type: docker_v2
                       name: week4demo
-                      domain: https://index.docker.io/v2/
+                      domain: docker.io
                       tag: <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
+          sharedPaths:
+            - /var/run
+          caching:
+            enabled: false
+            paths: []
     - stage:
         name: CDStage
         identifier: CDStage
