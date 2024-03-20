@@ -133,6 +133,41 @@ pipeline:
         when:
           pipelineStatus: All
     - stage:
+        name: ContainerScan
+        identifier: ContainerScan
+        description: ""
+        type: SecurityTests
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: K8Connector
+              namespace: demo-prod
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: AquaTrivy
+                  name: AquaTrivy_1
+                  identifier: AquaTrivy_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: container
+                      name: containerScan
+                      variant: containerScanVariant
+                    advanced:
+                      log:
+                        level: info
+                    privileged: true
+                    image:
+                      type: docker_v2
+                      name: week4demo
+                      tag: <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
+    - stage:
         name: CDStage
         identifier: CDStage
         description: ""
