@@ -6,13 +6,68 @@ pipeline:
         name: PyTest
         identifier: PyTest
         description: ""
-        type: Pipeline
+        type: SecurityTests
         spec:
-          org: default
-          pipeline: PyTest
-          project: default_project
-          inputSetReferences:
-            - GitRepoInputSet
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: K8Connector
+              namespace: demo-ns
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: PyTest1
+                  identifier: PyTest1
+                  spec:
+                    connectorRef: demo
+                    image: python:latest
+                    shell: Sh
+                    command: |
+                      set +x
+
+                      if [ -x "$(command -v git)" ]; then
+                        git config --global --add safe.directory '*' || true 
+                      fi
+
+                      set +x
+
+                      if [ -x "$(command -v git)" ]; then
+                        git config --global --add safe.directory '*' || true 
+                      fi
+
+                      set +x
+
+                      if [ -x "$(command -v git)" ]; then
+                        git config --global --add safe.directory '*' || true 
+                      fi
+
+                      set +x
+
+                      if [ -x "$(command -v git)" ]; then
+                        git config --global --add safe.directory '*' || true 
+                      fi
+
+                      set +x
+
+                      if [ -x "$(command -v git)" ]; then
+                        git config --global --add safe.directory '*' || true 
+                      fi
+
+                      pip install pytest
+                      pip install flask
+
+                      raw_file=$(base64 < test_api.py)
+                      config_file=$(echo "$raw_file" | base64 --decode)
+                      echo "$config_file" | pytest --junitxml=result.xml
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - result.xml
     - stage:
         name: BanditRepoScan
         identifier: BanditRepoScan
@@ -28,21 +83,6 @@ pipeline:
               ci:
                 codebase:
                   build: <+input>
-            stages:
-              - stage:
-                  identifier: BanditRepoScan
-                  type: SecurityTests
-                  spec:
-                    execution:
-                      steps:
-                        - step:
-                            identifier: Bandit_1
-                            type: Bandit
-                            spec:
-                              target:
-                                type: repository
-                                name: <+input>
-                                variant: <+input>
         when:
           pipelineStatus: All
     - stage:
