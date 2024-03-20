@@ -184,6 +184,8 @@ pipeline:
           caching:
             enabled: false
             paths: []
+        when:
+          pipelineStatus: All
     - stage:
         name: CDStage
         identifier: CDStage
