@@ -176,7 +176,7 @@ pipeline:
                     privileged: true
                     image:
                       type: docker_v2
-                      name: week4demo
+                      name: carthmannh/week4demo
                       domain: docker.io
                       tag: <+pipeline.stages.Build.spec.execution.steps.Run_2.output.outputVariables.sha>
           sharedPaths:
