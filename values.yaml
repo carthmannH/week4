@@ -1,5 +1,5 @@
 name: myapp
-replicas: 2
+replicas: 1
 
 image: <+artifact.image>
 # dockercfg: <+artifact.imagePullSecret>
