@@ -1,14 +1,24 @@
-{% extends "template.html" %} {% block body %}
+<html>
+<!-- This is the template file. Any code written here will automatically be carried onto the files that extend from this file(eg: home.html, account.html) -->
+<head>
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Python Website Demo</title>
+</head>
 
-<h2>Home Page</h2>
-<p>This is the home page!</p>
+<body>
+    <div>
+        <center>
+            <h1 style="font-family:verdana;">Simple Python Website Green Deployment Demo</h1>
+            <p>Note how these are defined under templates/template.html and dont need to be repeted on each and every
+                page</p>
+        </center>
 
+    </div>
+    <div>
+        <center>
+            {% block body %} {% endblock %}
+        </center>
+    </div>
+</body>
 
-<form action="/account" method="POST">
-    <input type="text" name="name" id="name" placeholder="Your Name" class="form-feild"><br>
-    <button type="submit" class="add-btn">See Account Page</button>
-</form>
-<br>
-
-<p>Note how this page can be accesed on both '/' and '/home'. Look into app.py for more information</p>
-{% endblock %}
+</html>
