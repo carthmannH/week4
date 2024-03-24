@@ -123,7 +123,7 @@ pipeline:
                         level: info
                     privileged: true
     - stage:
-        name: unitTestrgitRepoScanApproval
+        name: unitTestGitRepoScan_Approval
         identifier: BuildApproval
         description: ""
         type: Approval
@@ -260,7 +260,7 @@ pipeline:
         when:
           pipelineStatus: All
     - stage:
-        name: ContainerScanApproval
+        name: ContainerScan_Approval
         identifier: ContainerScanApproval
         description: ""
         type: Approval
