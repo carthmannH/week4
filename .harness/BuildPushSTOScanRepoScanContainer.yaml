@@ -28,36 +28,6 @@ pipeline:
                     image: python:latest
                     shell: Sh
                     command: |
-                      set +x
-
-                      if [ -x "$(command -v git)" ]; then
-                        git config --global --add safe.directory '*' || true 
-                      fi
-
-                      set +x
-
-                      if [ -x "$(command -v git)" ]; then
-                        git config --global --add safe.directory '*' || true 
-                      fi
-
-                      set +x
-
-                      if [ -x "$(command -v git)" ]; then
-                        git config --global --add safe.directory '*' || true 
-                      fi
-
-                      set +x
-
-                      if [ -x "$(command -v git)" ]; then
-                        git config --global --add safe.directory '*' || true 
-                      fi
-
-                      set +x
-
-                      if [ -x "$(command -v git)" ]; then
-                        git config --global --add safe.directory '*' || true 
-                      fi
-
                       pip install pytest
                       pip install flask
 
